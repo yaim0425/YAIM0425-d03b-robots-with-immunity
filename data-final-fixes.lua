@@ -148,12 +148,18 @@ function This_MOD.get_elements()
             This_MOD.id .. "-" ..
             That_MOD.name .. "-"
 
-        local Processed
-        for _, damage in pairs(This_MOD.damages) do
-            Processed = GMOD.entities[Name .. damage] ~= nil
-            if not Processed then break end
+        if
+            (function()
+                for _, damage in pairs(This_MOD.damages) do
+                    if not GMOD.items[Name .. damage] then
+                        return
+                    end
+                end
+                return true
+            end)()
+        then
+            return
         end
-        if Processed then return end
 
         --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 
@@ -277,7 +283,7 @@ function This_MOD.create_item(space)
                 i or #This_MOD.damages + 1
             ) .. "0"
 
-        --- Renombrar
+        --- Buscar el nombre
         local Item = GMOD.items[Name]
 
         --- Existe
@@ -390,7 +396,7 @@ function This_MOD.create_entity(space)
         --- Nombre a usar
         local Name = space.name .. (damage or "all")
 
-        --- Renombrar
+        --- Buscar el nombre
         local Entity = GMOD.entities[Name]
 
         --- Existe
@@ -567,7 +573,7 @@ function This_MOD.create_recipe(space)
                 i or #This_MOD.damages + 1
             ) .. "0"
 
-        --- Renombrar
+        --- Buscar el nombre
         local Recipe = data.raw.recipe[Name]
 
         --- Existe
