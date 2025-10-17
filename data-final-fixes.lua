@@ -31,7 +31,6 @@ function This_MOD.start()
             --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 
             --- Crear los elementos
-            This_MOD.create_subgroup(space)
             This_MOD.create_item(space)
             This_MOD.create_entity(space)
             This_MOD.create_recipe(space)
@@ -230,30 +229,6 @@ end
 
 ---------------------------------------------------------------------------
 
-function This_MOD.create_subgroup(space)
-    --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-    --- Validación
-    --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-
-    if not space.item then return end
-
-    --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-
-
-
-
-
-    --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-    --- Crear un nuevo subgrupo
-    --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-
-    local Old = space.item.subgroup
-    local New = space.subgroup
-    GMOD.duplicate_subgroup(Old, New)
-
-    --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-end
-
 function This_MOD.create_item(space)
     --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     --- Validación
@@ -340,6 +315,18 @@ function This_MOD.create_item(space)
         --- Subgrupo y Order
         Item.subgroup = space.subgroup
         Item.order = Order
+
+        --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+
+
+
+
+
+        --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+        --- Crear el subgrupo para el objeto
+        --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+
+        GMOD.duplicate_subgroup(space.item.subgroup, Item.subgroup)
 
         --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 
