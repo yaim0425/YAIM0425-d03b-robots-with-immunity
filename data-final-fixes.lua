@@ -813,7 +813,7 @@ function This_MOD.create_tech(space)
             Tech.research_trigger = {
                 type = "craft-item",
                 item =
-                    space.prefix .. (
+                    This_MOD.prefix .. (
                         damage or
                         This_MOD.damages[math.random(1, #This_MOD.damages)]
                     ),
